@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order ElkhanaBakery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('img/bg-form.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow-y: auto;
+        }
+        .order-form {
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+        .order-form h2 {
+            margin-top: 0;
+            text-align: center;
+        }
+        .order-form label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+        .item {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+        }
+        .item label {
+            flex: 1;
+        }
+        .item input[type="number"] {
+            width: 60px;
+            text-align: right;
+            margin-left: 10px;
+        }
+        .order-form button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            border: none;
+            background-color: #ff7043;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .order-form button:hover {
+            background-color: #e64a19;
+        }
+        .total-price {
+            font-weight: bold;
+            text-align: right;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function calculateTotal() {
+            let total = 0;
+            const items = document.querySelectorAll('.item');
+            items.forEach(item => {
+                const checkbox = item.querySelector('input[type="checkbox"]');
+                const quantity = item.querySelector('input[type="number"]');
+                const price = parseInt(checkbox.getAttribute('data-price'));
+                
+                if (checkbox.checked && quantity.value) {
+                    total += price * parseInt(quantity.value);
+                }
+            });
+            document.getElementById('total-price').innerText = "Total Harga: Rp" + total.toLocaleString();
+        }
+    </script>
+</head>
+<body>
+    <form class="order-form" action="submit_order.php" method="POST">
+        <h2>Elkhana Bakery</h2>
+        
+        <label for="name">Nama:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="phone">No. Telepon:</label>
+        <input type="text" id="phone" name="phone" required>
+
+        <label for="address">Alamat Pengiriman:</label>
+        <textarea id="address" name="address" rows="3" required></textarea>
+
+        <!-- Roti dan Pastry -->
+        <label>Roti dan Pastry:</label>
+        <div class="item"><label><input type="checkbox" data-price="15000" onchange="calculateTotal()"> Croissant - Chocolate (Rp15.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="12000" onchange="calculateTotal()"> Croissant - Original (Rp12.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="18000" onchange="calculateTotal()"> Croissant - Almond (Rp18.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="13000" onchange="calculateTotal()"> Danish Pastry - Strawberry (Rp13.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="13000" onchange="calculateTotal()"> Danish Pastry - Blueberry (Rp13.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="13000" onchange="calculateTotal()"> Danish Pastry - Apple (Rp13.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="7000" onchange="calculateTotal()"> Donat - Gula Halus (Rp7.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="8000" onchange="calculateTotal()"> Donat - Isi Coklat (Rp8.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="6000" onchange="calculateTotal()"> Donat - Klasik (Rp6.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="10000" onchange="calculateTotal()"> Brioche (Rp10.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="10000" onchange="calculateTotal()"> Scone - Kismis (Rp10.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="10000" onchange="calculateTotal()"> Scone - Blueberry (Rp10.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="15000" onchange="calculateTotal()"> Roti Sobek - Pandan (Rp15.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="15000" onchange="calculateTotal()"> Roti Sobek - Coklat (Rp15.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="15000" onchange="calculateTotal()"> Roti Sobek - Keju (Rp15.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+
+        <!-- Kue Kering -->
+        <label>Kue Kering:</label>
+        <div class="item"><label><input type="checkbox" data-price="9000" onchange="calculateTotal()"> Cookies - Double Chocolate (Rp9.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="8000" onchange="calculateTotal()"> Cookies - Chocolate Chip (Rp8.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="8000" onchange="calculateTotal()"> Cookies - Oatmeal (Rp8.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="10000" onchange="calculateTotal()"> Macaron - Raspberry (Rp10.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="10000" onchange="calculateTotal()"> Macaron - Vanilla (Rp10.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="10000" onchange="calculateTotal()"> Macaron - Matcha (Rp10.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="7000" onchange="calculateTotal()"> Shortbread (Rp7.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="12000" onchange="calculateTotal()"> Almond Biscotti (Rp12.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="15000" onchange="calculateTotal()"> Brownies Potong - Coklat (Rp15.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="15000" onchange="calculateTotal()"> Brownies Potong - Kacang (Rp15.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+
+        
+        <!-- Roti Kasar / Tradisional -->
+        <label>Roti Kasar / Tradisional:</label>
+        <div class="item"><label><input type="checkbox" data-price="15000" onchange="calculateTotal()"> Roti Tawar - Gandum (Rp15.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="12000" onchange="calculateTotal()"> Roti Tawar - Putih (Rp12.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="8000" onchange="calculateTotal()"> Roti Manis - Coklat (Rp8.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="8000" onchange="calculateTotal()"> Roti Manis - Kacang (Rp8.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="8000" onchange="calculateTotal()"> Roti Manis - Pisang (Rp8.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="15000" onchange="calculateTotal()"> Roti Sobek Pandan Kelapa (Rp15.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="10000" onchange="calculateTotal()"> Roti Bakar - Pandan (Rp10.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="10000" onchange="calculateTotal()"> Roti Bakar - Coklat (Rp10.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="10000" onchange="calculateTotal()"> Roti Bakar - Keju (Rp10.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+
+        <!-- Kue Basah dan Dessert -->
+        <label>Kue Basah dan Dessert:</label>
+        <div class="item"><label><input type="checkbox" data-price="20000" onchange="calculateTotal()"> Cake Potong - Black Forest (Rp20.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="15000" onchange="calculateTotal()"> Cake Potong - Rainbow Cake (Rp15.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="18000" onchange="calculateTotal()"> Cake Potong - Red Velvet (Rp18.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="25000" onchange="calculateTotal()"> Tiramisu Cup (Rp25.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="35000" onchange="calculateTotal()"> Cheesecake - Strawberry (Rp35.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="35000" onchange="calculateTotal()"> Cheesecake - Blueberry (Rp35.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="30000" onchange="calculateTotal()"> Cheesecake - Plain (Rp30.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="10000" onchange="calculateTotal()"> Pudding - Coklat (Rp10.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="10000" onchange="calculateTotal()"> Pudding - Caramel (Rp10.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="10000" onchange="calculateTotal()"> Pudding - Buah-buahan (Rp10.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="12000" onchange="calculateTotal()"> Cupcake - Vanilla (Rp12.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="12000" onchange="calculateTotal()"> Cupcake - Coklat (Rp12.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="12000" onchange="calculateTotal()"> Cupcake - Oreo (Rp12.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+
+        <!-- Minuman -->
+        <label>Minuman:</label>
+        <div class="item"><label><input type="checkbox" data-price="20000" onchange="calculateTotal()"> Kopi - Cappuccino (Rp20.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="18000" onchange="calculateTotal()"> Kopi - Espresso (Rp18.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="20000" onchange="calculateTotal()"> Kopi - Latte (Rp20.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="10000" onchange="calculateTotal()"> Teh - Original (Rp10.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="12000" onchange="calculateTotal()"> Teh - Hijau (Rp12.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="15000" onchange="calculateTotal()"> Teh - Tarik (Rp15.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="15000" onchange="calculateTotal()"> Jus Buah - Mangga (Rp15.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="15000" onchange="calculateTotal()"> Jus Buah - Jeruk (Rp15.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="15000" onchange="calculateTotal()"> Jus Buah - Apel (Rp15.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="18000" onchange="calculateTotal()"> Milkshake - Strawberry (Rp18.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="18000" onchange="calculateTotal()"> Milkshake - Vanilla (Rp18.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        <div class="item"><label><input type="checkbox" data-price="18000" onchange="calculateTotal()"> Milkshake - Coklat (Rp18.000)</label><input type="number" min="0" value="1" onchange="calculateTotal()"></div>
+        
+        <label for="date">Tanggal Pembelian:</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="time">Jam Pembelian:</label>
+        <input type="time" id="time" name="time" required>
+
+        <div class="total-price" id="total-price">Total Harga: Rp0</div>
+        <button type="submit">Pesan Sekarang</button>
+    </form>
+</body>
+</html>
